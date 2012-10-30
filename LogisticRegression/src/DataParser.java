@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 public class DataParser {
-	Map<String, String> config;
+	public Map<String, String> config;
 	
 	public DataParser(String confFile) {
 		BufferedReader br;
@@ -36,7 +36,8 @@ public class DataParser {
 			while ((line = br.readLine()) != null) {    
 			   String[] split = line.split(" ");
 			   AbstractEntry ae = new AbstractEntry();
-			   SparseTermList ste = new SparseTermList();
+			   SparseTermList ste = new SparseTermList(14601);
+			   ste.put(0, 1);
 			   for(int i=1; i<split.length; i++) {
 				   String[] splitEntry = split[i].split(":");
 				   ste.put(Integer.parseInt(splitEntry[0]), Double.parseDouble(splitEntry[1]));

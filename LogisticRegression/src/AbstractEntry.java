@@ -5,10 +5,6 @@ public class AbstractEntry {
 	private int actualLabel;
 	private SparseTermList list;
 	
-	public AbstractEntry() {
-		list = new SparseTermList();
-	}
-	
 	public int getId() {
 		return id;
 	}
