@@ -3,11 +3,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Class to represent data vector, allows for easy implementation changes.
+ */
 public class SparseTermList implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8347221082845553086L;
 	double[] list;
 	int length;

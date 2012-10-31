@@ -10,6 +10,11 @@ import java.util.Map;
 public class DataParser {
 	public Map<String, String> config;
 	
+	/**
+	 * Reads parameters from file (confFile) into config map,
+	 * and initializes for parsing data.
+	 * @param confFile path to config file
+	 */
 	public DataParser(String confFile) {
 		BufferedReader br;
 		config = new HashMap<String, String>();
@@ -21,11 +26,16 @@ public class DataParser {
 			   config.put(s[0], s[1]);
 			}		
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
 	}
 	
+	/**
+	 * Parses the data of the given type (train/test). Filepath is
+	 * read from config.
+	 * @param type key in config to get file path
+	 * @return list of parsed entries
+	 */
 	private List<AbstractEntry> parse(String type) { 
 		BufferedReader br;
 		try {
@@ -36,8 +46,8 @@ public class DataParser {
 			while ((line = br.readLine()) != null) {    
 			   String[] split = line.split(" ");
 			   AbstractEntry ae = new AbstractEntry();
-			   SparseTermList ste = new SparseTermList(14602);
-			   ste.put(0, 1);
+			   SparseTermList ste = new SparseTermList(14602); //14601 words + 1 for [0]
+			   ste.put(0, 1); // Initialize [0] to 1
 			   for(int i=1; i<split.length; i++) {
 				   String[] splitEntry = split[i].split(":");
 				   ste.put(Integer.parseInt(splitEntry[0]), Double.parseDouble(splitEntry[1]));
@@ -56,10 +66,18 @@ public class DataParser {
 		return null;
 	}
 	
+	/**
+	 * Public method for parsing training data.
+	 * @return list of data points
+	 */
 	public List<AbstractEntry> parseTrain() {
 		return parse("train");
 	}
 	
+	/**
+	 * Public method for parsing test data.
+	 * @return list of data points
+	 */
 	public List<AbstractEntry> parseTest() {
 		return parse("test");
 	}

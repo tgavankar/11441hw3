@@ -1,4 +1,7 @@
 
+/**
+ * Class to represent a data entry.
+ */
 public class AbstractEntry {
 	private int id;
 	private int predLabel;
