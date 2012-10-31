@@ -22,14 +22,14 @@ public class LogisticRegressionRunner {
 		
 		for(int i=1; i<=17; i++) {
 			System.out.println("Training: " + i);
-			LogisticRegression lr = new LogisticRegression(i, 0.01, Double.parseDouble(dp.config.get("c")));
+			LogisticRegression lr = new LogisticRegression(i, 0.01, Double.parseDouble(dp.config.get("c")), 0.001);
 		
-			//lr.train(data);
-			lr = loadFromDisk("w" + i);
+			lr.train(data);
+			//lr = loadFromDisk("w" + i);
 		
 			lrl.add(lr);
 			
-			//flushToDisk(lr, "w" + i);
+			flushToDisk(lr, "w" + i);
 		}
 		
 		long endRun = System.currentTimeMillis();

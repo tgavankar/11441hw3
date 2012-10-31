@@ -7,12 +7,14 @@ public class LogisticRegression implements Serializable {
 	private SparseTermList W;
 	private double learnRate;
 	private double C;
+	private double converges;
 	
-	public LogisticRegression(int label, double learnRate, double C) {
+	public LogisticRegression(int label, double learnRate, double C, double converges) {
 		this.label = label;
 		this.W = new SparseTermList(14601);
 		this.learnRate = learnRate;
 		this.C = C;
+		this.converges = converges;
 	}
 	
 	public void train(List<AbstractEntry> data) {
@@ -30,9 +32,9 @@ public class LogisticRegression implements Serializable {
 				}
 			}
 			dist = dist(prevW, W);
-			System.out.println(dist);
+			//System.out.println(dist);
 			prevW = W.deepCopy();
-		} while(dist > 0.01);
+		} while(dist > this.converges);
 	}
 	
 	private double sigmoid(SparseTermList W, SparseTermList X) {
