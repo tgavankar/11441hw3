@@ -11,7 +11,7 @@ public class LogisticRegression implements Serializable {
 	
 	public LogisticRegression(int label, double learnRate, double C, double converges) {
 		this.label = label;
-		this.W = new SparseTermList(14601);
+		this.W = new SparseTermList(14602);
 		this.learnRate = learnRate;
 		this.C = C;
 		this.converges = converges;

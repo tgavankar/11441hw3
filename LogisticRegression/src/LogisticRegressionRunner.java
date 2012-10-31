@@ -9,33 +9,35 @@ import java.util.List;
 
 public class LogisticRegressionRunner {
 	public static void main(String[] args) {
-		System.out.println("Start");
+		//System.out.println("Start");
 		long startParse = System.currentTimeMillis();
 		
 		DataParser dp = new DataParser("data.txt");
 		List<AbstractEntry> data = dp.parseTrain();
 		
 		long endParse = System.currentTimeMillis();
-		System.out.println("Parse: " + (endParse - startParse));		
+		//System.out.println("Parse: " + (endParse - startParse));		
 		
 		List<LogisticRegression> lrl = new ArrayList<LogisticRegression>();
 		
 		for(int i=1; i<=17; i++) {
-			System.out.println("Training: " + i);
-			LogisticRegression lr = new LogisticRegression(i, 0.01, Double.parseDouble(dp.config.get("c")), 0.001);
+			//System.out.println("Training: " + i);
+			LogisticRegression lr = new LogisticRegression(i, 0.01, Double.parseDouble(dp.config.get("c")), 0.0001);
 		
 			lr.train(data);
 			//lr = loadFromDisk("w" + i);
 		
 			lrl.add(lr);
 			
-			flushToDisk(lr, "w" + i);
+			//flushToDisk(lr, "w" + i);
 		}
 		
 		long endRun = System.currentTimeMillis();
 		
 
-		System.out.println("Train: " + (endRun - endParse));
+		//System.out.println("Train: " + (endRun - endParse));
+		
+		data = dp.parseTest();
 		
 		// Classify
 		int count = 0;
@@ -59,12 +61,8 @@ public class LogisticRegressionRunner {
 			
 			entry.setPredLabel(maxLabel);
 			
-			if(maxLabel == entry.getActualLabel()) {
-				count++;
-			}
+			System.out.println(entry.getPredLabel() + " " + entry.getActualLabel());			
 		}
-		
-		System.out.println("Accuracy: " + (double) (1.0*count) / data.size());
 	}
 	
 	private static void flushToDisk(LogisticRegression e, String name) {

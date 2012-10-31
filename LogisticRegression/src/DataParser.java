@@ -36,7 +36,7 @@ public class DataParser {
 			while ((line = br.readLine()) != null) {    
 			   String[] split = line.split(" ");
 			   AbstractEntry ae = new AbstractEntry();
-			   SparseTermList ste = new SparseTermList(14601);
+			   SparseTermList ste = new SparseTermList(14602);
 			   ste.put(0, 1);
 			   for(int i=1; i<split.length; i++) {
 				   String[] splitEntry = split[i].split(":");
