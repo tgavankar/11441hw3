@@ -1,28 +1,30 @@
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class SparseTermList implements Serializable {
+public class MapSparseTermList implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8347221082845553086L;
-	double[] list;
-	int length;
+	Map<Integer, Double> list;
+	public int length;
 	
-	public SparseTermList(int size) {
-		list = new double[size];
+	public MapSparseTermList(int size) {
+		list = new HashMap<Integer, Double>();
 		length = size;
 	}
 	
 	public double get(int i) {
-		return list[i];
+		if(list.containsKey(i)) {
+			return list.get(i);
+		}
+		return 0.0;
 	}
 	
 	public void put(int i, double s) {
-		list[i] = s;
+		list.put(i, s);
 	}
 	
 	public SparseTermList deepCopy() {
@@ -33,10 +35,5 @@ public class SparseTermList implements Serializable {
 			}
 		}
 		return out;
-	}
-	
-	@Override
-	public String toString() {
-		return Arrays.toString(list);
 	}
 }

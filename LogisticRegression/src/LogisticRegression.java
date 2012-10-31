@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.List;
 
 
-public class LogisticRegression {
+public class LogisticRegression implements Serializable {
 	private int label;
 	private SparseTermList W;
 	private double learnRate;
@@ -21,10 +22,11 @@ public class LogisticRegression {
 			for(int i=0; i<data.size(); i++) {
 				AbstractEntry entry = data.get(i);
 				SparseTermList X = entry.getList();
+				double y = (entry.getActualLabel() == this.label) ? 1 : 0;
 				double hx = sigmoid(W, X);
 				
 				for(int j=0; j<W.length; j++) {
-					W.put(j, W.get(j) + this.learnRate * (entry.getActualLabel() - hx * X.get(j) - C * W.get(j)));
+					W.put(j, W.get(j) + this.learnRate * (y - hx * X.get(j) - C * W.get(j)));
 				}
 			}
 			dist = dist(prevW, W);
@@ -39,6 +41,9 @@ public class LogisticRegression {
 	private double dotp(SparseTermList W, SparseTermList X) {
 		double out = 0;
 		for(int i=0; i<W.length; i++) {
+			if(X.get(i) == 0) {
+				continue;
+			}
 			out += W.get(i) * X.get(i);
 		}
 		return out;
@@ -51,4 +56,21 @@ public class LogisticRegression {
 		}
 		return Math.sqrt(out);
 	}
+	
+	public SparseTermList getW() {
+		return W;
+	}
+	
+	public void setW(SparseTermList w) {
+		this.W = w;
+	}
+	
+	public double classify(SparseTermList X) {
+		return sigmoid(this.W, X);
+	}
+	
+	/*@Override
+	public String toString() {
+		return this.W.toString();
+	}*/
 }
