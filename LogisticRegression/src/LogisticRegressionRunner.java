@@ -20,7 +20,7 @@ public class LogisticRegressionRunner {
 		
 		List<LogisticRegression> lrl = new ArrayList<LogisticRegression>();
 		
-		for(int i=1; i<=17; i++) {
+		for(int i=1; i<=1; i++) {
 			System.out.println("Training: " + i);
 			LogisticRegression lr = new LogisticRegression(i, 0.01, Double.parseDouble(dp.config.get("c")));
 		

@@ -67,8 +67,7 @@ public class LogisticRegression implements Serializable {
 	}
 	
 	public double classify(SparseTermList X) {
-		return dotp(this.W, X);
-		//return sigmoid(this.W, X);
+		return sigmoid(this.W, X);
 	}
 	
 	/*@Override
