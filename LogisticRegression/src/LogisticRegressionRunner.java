@@ -62,7 +62,7 @@ public class LogisticRegressionRunner {
 		int count = 0;
 		for(int i=0; i<data.size(); i++) {
 			AbstractEntry entry = data.get(i);
-			double max = Double.MIN_VALUE;
+			double max = Double.NEGATIVE_INFINITY;
 			int maxLabel = -1;
 			for(int j=0; j<lrl.size(); j++) {
 				double pred = lrl.get(j).classify(entry.getList());

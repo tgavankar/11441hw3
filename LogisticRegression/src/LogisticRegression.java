@@ -17,8 +17,8 @@ public class LogisticRegression implements Serializable {
 	
 	public void train(List<AbstractEntry> data) {
 		double dist = Double.MAX_VALUE;
+		SparseTermList prevW = W.deepCopy();
 		do {
-			SparseTermList prevW = W.deepCopy();
 			for(int i=0; i<data.size(); i++) {
 				AbstractEntry entry = data.get(i);
 				SparseTermList X = entry.getList();
@@ -26,11 +26,12 @@ public class LogisticRegression implements Serializable {
 				double hx = sigmoid(W, X);
 				
 				for(int j=0; j<W.length; j++) {
-					W.put(j, W.get(j) + this.learnRate * (y - hx * X.get(j) - C * W.get(j)));
+					W.put(j, W.get(j) + this.learnRate * (y - hx) * X.get(j) - this.learnRate * (C * W.get(j)));
 				}
 			}
 			dist = dist(prevW, W);
 			System.out.println(dist);
+			prevW = W.deepCopy();
 		} while(dist > 0.01);
 	}
 	
@@ -66,7 +67,8 @@ public class LogisticRegression implements Serializable {
 	}
 	
 	public double classify(SparseTermList X) {
-		return sigmoid(this.W, X);
+		return dotp(this.W, X);
+		//return sigmoid(this.W, X);
 	}
 	
 	/*@Override
