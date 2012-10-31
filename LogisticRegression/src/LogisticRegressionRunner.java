@@ -20,7 +20,7 @@ public class LogisticRegressionRunner {
 		
 		List<LogisticRegression> lrl = new ArrayList<LogisticRegression>();
 		
-		for(int i=1; i<=1; i++) {
+		for(int i=1; i<=17; i++) {
 			System.out.println("Training: " + i);
 			LogisticRegression lr = new LogisticRegression(i, 0.01, Double.parseDouble(dp.config.get("c")));
 		
@@ -37,35 +37,20 @@ public class LogisticRegressionRunner {
 
 		System.out.println("Train: " + (endRun - endParse));
 		
-		/*SparseTermList w = null;;
-        try
-        {
-           FileInputStream fileIn =
-                         new FileInputStream("w.ser");
-           ObjectInputStream in = new ObjectInputStream(fileIn);
-           w = (SparseTermList) in.readObject();
-           in.close();
-           fileIn.close();
-       } 
-       catch(Exception i) {
-           i.printStackTrace();
-       }
-	
-        if(w != null) {
-        	lr.setW(w);
-        }*/
-		
-		
-		
-		
 		// Classify
 		int count = 0;
 		for(int i=0; i<data.size(); i++) {
 			AbstractEntry entry = data.get(i);
 			double max = Double.NEGATIVE_INFINITY;
 			int maxLabel = -1;
+			
+			double[] debug = new double[lrl.size()]; //debug
+			
 			for(int j=0; j<lrl.size(); j++) {
 				double pred = lrl.get(j).classify(entry.getList());
+				
+				debug[j] = pred; //debug
+				
 				if(pred > max) {
 					max = pred;
 					maxLabel = j+1;
@@ -80,7 +65,6 @@ public class LogisticRegressionRunner {
 		}
 		
 		System.out.println("Accuracy: " + (double) (1.0*count) / data.size());
-		return;
 	}
 	
 	private static void flushToDisk(LogisticRegression e, String name) {
