@@ -63,6 +63,7 @@ public class LogisticRegressionRunner {
 	 * @param e LogisticRegression object
 	 * @param name name of output file (without filetype)
 	 */
+	@SuppressWarnings("unused")
 	private static void flushToDisk(LogisticRegression e, String name) {
 		try {
 			FileOutputStream fileOut = new FileOutputStream(name + ".ser");
@@ -81,6 +82,7 @@ public class LogisticRegressionRunner {
 	 * @param name filename without extension
 	 * @return LogisticRegression object from disk, or null if Exception
 	 */
+	@SuppressWarnings("unused")
 	private static LogisticRegression loadFromDisk(String name) {
 		LogisticRegression lr = null;  
 		try {

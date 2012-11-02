@@ -1,7 +1,5 @@
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Class to represent data vector, allows for easy implementation changes.

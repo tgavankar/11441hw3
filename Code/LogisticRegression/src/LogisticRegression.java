@@ -8,6 +8,7 @@ import java.util.List;
  * rate. Stops training (converges) on given convergence distance. 
  */
 public class LogisticRegression implements Serializable {
+	private static final long serialVersionUID = -7920030923981484995L;
 	private int label;
 	private SparseTermList W;
 	private double learnRate;

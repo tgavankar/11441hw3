@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,11 +57,11 @@ public class DataParser {
 			   out.add(ae);
 			   id++;
 			}
+			br.close();
 			return out;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  
+		}
 		return null;
 	}
 	
